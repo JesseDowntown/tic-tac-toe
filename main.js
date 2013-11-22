@@ -28,31 +28,44 @@ var checkForWinner = function () {
   if ( spaces[0] === spaces[1] && spaces[1] === spaces[2]
     || spaces[3] === spaces[4] && spaces[4] === spaces[5]
     || spaces[6] === spaces[7] && spaces[7] === spaces[8]
-    // TODO: Check for rest of game winning cases
+    || spaces[0] === spaces[4] && spaces[4] === spaces[8]
+    || spaces[1] === spaces[4] && spaces[4] === spaces[7]
+    || spaces[0] === spaces[3] && spaces[3] === spaces[6]
+    || spaces[2] === spaces[5] && spaces[5] === spaces[8]
+    || spaces[2] === spaces[4] && spaces[4] === spaces[6]
   )
   {
     console.log('somebody won');
-    // TODO: Trigger 'game-win' event with the winning player as the event data
+    // Trigger 'game-win' event with the winning player as the event data
+    $(document).trigger('game-win', (currentPlayer));
   }
 };
 
 $(document).on('click', '#board .space', function (e) {
-  var spaceNum = $(e.currentTarget).index();
-  console.log('You clicked on space #' + spaceNum);
+    var spaceNum = $(e.currentTarget).index();
+    console.log(currentPlayer + ' clicked on space #' + spaceNum);
+  
+  if (spaces[spaceNum] === "veggies" || spaces[spaceNum] === "junkfood") {
+    alert('That space is already taken.');
+  } else {
 
-  // Mark the space with the current player's name
-  // TODO: Don't mark it unless the space is blank
-  spaces[spaceNum] = currentPlayer;
-  // Add class to elem so css can take care of the visuals
-  $('#board .space:eq(' + spaceNum + ')').addClass(currentPlayer);
+    // Mark the space with the current player's name
+    // TODO: Don't mark it unless the space is blank
+    spaces[spaceNum] = currentPlayer;
+  
+    // Add class to elem so css can take care of the visuals
+    $('#board .space:eq(' + spaceNum + ')').addClass(currentPlayer);
 
   checkForWinner();
   setNextTurn();
+  }
 });
 
 $(document).on('game-win', function (e, winner) {
-  // TODO: Alert who won the game
+  // Alert who won the game
+  alert(winner + " won!");
 });
 
 // Start the game
 setNextTurn();
+
