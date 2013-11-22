@@ -37,7 +37,7 @@ var checkForWinner = function () {
   {
     console.log('somebody won');
     // Trigger 'game-win' event with the winning player as the event data
-    $(document).trigger('game-win', (currentPlayer));
+    $(document).trigger('game-win', currentPlayer);
   }
 };
 
@@ -45,8 +45,8 @@ $(document).on('click', '#board .space', function (e) {
     var spaceNum = $(e.currentTarget).index();
     console.log(currentPlayer + ' clicked on space #' + spaceNum);
   
-  if (spaces[spaceNum] === "veggies" || spaces[spaceNum] === "junkfood") {
-    alert('That space is already taken.');
+  if (spaces[spaceNum]) {
+    alert('That space is already taken. Please choose another one.');
   } else {
 
     // Mark the space with the current player's name
