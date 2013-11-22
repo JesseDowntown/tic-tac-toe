@@ -24,3 +24,6 @@
   background: url("img/junkfood.jpg");
   background-size: 100% 100%;
 }
+#new-game {
+  display: none;
+}

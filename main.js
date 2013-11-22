@@ -1,4 +1,3 @@
-
 // Using NaN instead of null is a clever hack. See checkForWinner for details.
 var spaces = [
   NaN, NaN, NaN,
@@ -64,8 +63,15 @@ $(document).on('click', '#board .space', function (e) {
 $(document).on('game-win', function (e, winner) {
   // Alert who won the game
   alert(winner + " won!");
+  $('#board').hide();
+  $('h3').text('Would you like to play again?');
+  $('#new-game').show();
 });
 
 // Start the game
 setNextTurn();
+
+$(document).on('click', '#new-game', function() {
+  location.reload();
+})
 
